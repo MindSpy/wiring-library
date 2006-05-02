@@ -1,6 +1,6 @@
 /*
-  Matrix.h - Max7219 LED Matrix library for Arduino & Wiring
-  Copyright (c) 2006 Nicholas Zambetti.  All right reserved.
+  Foo.h - test library
+  Copyright (c) 2006 David A. Mellis.  All right reserved.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -17,40 +17,17 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef Matrix_h
-#define Matrix_h
+#ifndef Sprite_h
+#define Sprite_h
 
-// include core Wiring API
-#include "WProgram.h"
+//#include <inttypes.h>
 
-// declare other libraries depended on (if any)
-class Sprite;
-
-class Matrix
-{
-  private:
-    byte _pinData;
-    byte _pinClock;
-    byte _pinLoad;
-
-    byte* _buffer;
-    byte _screens;
-    byte _maximumX;
-
-    void putByte(byte);
-    void setRegister(byte, byte);
-    void syncRow(int);
-
-    void setScanLimit(byte);
-
-    void buffer(int, int, byte);
-  public:
-    Matrix(byte, byte, byte, byte = 1);
-    void setBrightness(byte);
-    void write(int, int, byte);
-    void write(int, int, Sprite);
-    void clear(void);
+class Foo {
+private:
+  int pin, interval;
+public:
+  Foo(int pin, int interval);
+  void foo();
 };
 
 #endif
-

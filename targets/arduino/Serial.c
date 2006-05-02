@@ -1,5 +1,6 @@
 /*
-  Matrix.h - Max7219 LED Matrix library for Arduino & Wiring
+  Serial.c - Serial library for Wiring
+  Based on Hernando Barragan's original C implementation
   Copyright (c) 2006 Nicholas Zambetti.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -17,40 +18,28 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef Matrix_h
-#define Matrix_h
+#include "Serial.h"
+#include "uart.h"
 
-// include core Wiring API
-#include "WProgram.h"
-
-// declare other libraries depended on (if any)
-class Sprite;
-
-class Matrix
+void uart_init(uint8_t uart, long baudrate)
 {
-  private:
-    byte _pinData;
-    byte _pinClock;
-    byte _pinLoad;
+	uartInit();
+	uartSetBaudRate(baudrate);
+}
 
-    byte* _buffer;
-    byte _screens;
-    byte _maximumX;
+int uart_read(uint8_t uart)
+{
+	return uartGetByte();
+}
 
-    void putByte(byte);
-    void setRegister(byte, byte);
-    void syncRow(int);
+uint8_t uart_available(uint8_t uart)
+{
+	return uartGetRxBuffer()->datalength;
+}
 
-    void setScanLimit(byte);
-
-    void buffer(int, int, byte);
-  public:
-    Matrix(byte, byte, byte, byte = 1);
-    void setBrightness(byte);
-    void write(int, int, byte);
-    void write(int, int, Sprite);
-    void clear(void);
-};
-
-#endif
-
+void uart_write(uint8_t uart, char *buf, uint8_t len)
+{
+  int i;
+  for (i = 0; i < len; i++)
+    uartSendByte(buf[i]);
+}

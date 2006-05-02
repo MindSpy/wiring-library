@@ -1,5 +1,6 @@
 /*
-  Matrix.h - Max7219 LED Matrix library for Arduino & Wiring
+  Serial.h - Serial library for Wiring
+  Based on Hernando Barragan's original C implementation
   Copyright (c) 2006 Nicholas Zambetti.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -17,40 +18,15 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef Matrix_h
-#define Matrix_h
+#ifndef Serial_h
+#define Serial_h
 
-// include core Wiring API
-#include "WProgram.h"
+#include <inttypes.h>
 
-// declare other libraries depended on (if any)
-class Sprite;
-
-class Matrix
-{
-  private:
-    byte _pinData;
-    byte _pinClock;
-    byte _pinLoad;
-
-    byte* _buffer;
-    byte _screens;
-    byte _maximumX;
-
-    void putByte(byte);
-    void setRegister(byte, byte);
-    void syncRow(int);
-
-    void setScanLimit(byte);
-
-    void buffer(int, int, byte);
-  public:
-    Matrix(byte, byte, byte, byte = 1);
-    void setBrightness(byte);
-    void write(int, int, byte);
-    void write(int, int, Sprite);
-    void clear(void);
-};
+void uart_init(uint8_t, long);
+int uart_read(uint8_t);
+uint8_t uart_available(uint8_t);
+void uart_write(uint8_t, char*, uint8_t);
 
 #endif
 

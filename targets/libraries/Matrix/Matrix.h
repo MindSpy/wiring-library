@@ -20,35 +20,33 @@
 #ifndef Matrix_h
 #define Matrix_h
 
-// include core Wiring API
-#include "WProgram.h"
+#include <inttypes.h>
 
-// declare other libraries depended on (if any)
 class Sprite;
 
 class Matrix
 {
   private:
-    byte _pinData;
-    byte _pinClock;
-    byte _pinLoad;
+    uint8_t _pinData;
+    uint8_t _pinClock;
+    uint8_t _pinLoad;
 
-    byte* _buffer;
-    byte _screens;
-    byte _maximumX;
+    uint8_t* _buffer;
+    uint8_t _screens;
+    uint8_t _maximumX;
 
-    void putByte(byte);
-    void setRegister(byte, byte);
-    void syncRow(int);
+    void putByte(uint8_t);
+    void setRegister(uint8_t, uint8_t);
+    void syncRow(uint8_t);
 
-    void setScanLimit(byte);
+    void setScanLimit(uint8_t);
 
-    void buffer(int, int, byte);
+    void buffer(uint8_t, uint8_t, uint8_t);
   public:
-    Matrix(byte, byte, byte, byte = 1);
-    void setBrightness(byte);
-    void write(int, int, byte);
-    void write(int, int, Sprite);
+    Matrix(uint8_t, uint8_t, uint8_t, uint8_t = 1);
+    void setBrightness(uint8_t);
+    void write(uint8_t, uint8_t, uint8_t);
+    void write(uint8_t, uint8_t, Sprite);
     void clear(void);
 };
 
