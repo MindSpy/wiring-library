@@ -38,7 +38,7 @@ void init()
         disableWatchDog();
 	initClocks();
         enableWatchDogIntervalMode();
-        __eint(); //enable interrupts
+        __eint();
 }
 
 void disableWatchDog()
@@ -77,7 +77,7 @@ void enableWatchDogIntervalMode(void)
 
 void initClocks(void)
 {
-#if defined(CALBC1_16MHZ_) && F_CPU >= 16000000L
+/*#if defined(CALBC1_16MHZ_) && F_CPU >= 16000000L
 	BCSCTL1 = CALBC1_16MHZ;
 	DCOCTL = CALDCO_16MHZ;
 #elif defined(CALBC1_12MHZ_) && (F_CPU >= 12000000L)
@@ -88,7 +88,9 @@ void initClocks(void)
 	DCOCTL = CALDCO_8MHZ;
 #elif defined(CALBC1_1MHZ_) && (F_CPU >= 1000000L)
 	BCSCTL1 = CALBC1_1MHZ;
-	DCOCTL = CALDCO_1MHZ;
+	DCOCTL = CALDCO_1MHZ;*/
+#if F_CPU >= 16000000L
+#elif 
 #else
         #warning No Suitable Frequency found!
 #endif
