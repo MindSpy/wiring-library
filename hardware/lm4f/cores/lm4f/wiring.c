@@ -40,6 +40,10 @@ static void (*SysTickCbFuncs[8])(uint32_t ui32TimeMS);
 #define SYSTICKMS               (1000 / SYSTICKHZ)
 #define SYSTICKHZ               100
 
+#ifndef TIMER5DELAY
+#define TIMER5DELAY 1000 
+#endif
+
 static unsigned long milliseconds = 0;
 #define SYSTICK_INT_PRIORITY    0x80
 void timerInit()
@@ -71,7 +75,7 @@ void timerInit()
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER5); //not tied to launchpad pin
     ROM_TimerConfigure(TIMER5_BASE, TIMER_CFG_PERIODIC_UP);
 
-    ROM_TimerLoadSet(TIMER5_BASE, TIMER_A, F_CPU/1000);
+    ROM_TimerLoadSet(TIMER5_BASE, TIMER_A, F_CPU/TIMER5DELAY);
 
     ROM_IntEnable(INT_TIMER5A);
     ROM_TimerIntEnable(TIMER5_BASE, TIMER_TIMA_TIMEOUT);
